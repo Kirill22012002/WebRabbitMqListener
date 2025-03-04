@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+#messages {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+.message {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+.message:last-child {
+  border-bottom: none;
+}
