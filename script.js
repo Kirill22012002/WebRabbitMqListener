@@ -4,6 +4,12 @@ const messageList = document.getElementById('message-list');
 ws.onmessage = function(event) {
     const message = document.createElement('div');
     message.className = 'message';
-    message.textContent = event.data;
+    try {
+        const jsonMessage = JSON.parse(event.data);
+        message.innerHTML = "<pre>" + JSON.stringify(jsonMessage, null, 2) + "</pre>";
+    } catch (e) {
+        message.textContent = event.data;
+    }
+
     messageList.appendChild(message);
 };

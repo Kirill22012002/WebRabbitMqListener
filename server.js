@@ -10,9 +10,13 @@ const wss = new WebSocket.Server({ port: 8080 });
 async function connectToRabbitMQ() {
   const connection = await amqp.connect("amqp://localhost");
   const channel = await connection.createChannel();
-  const queue = "agentshub_from_queue";
+  const exchange = "agentshub_to";
+  const queue = "agentshub_to_queue";
+  const routingKey = "agentshub.to";
 
+  await channel.assertExchange(exchange, "topic", { durable: true });
   await channel.assertQueue(queue, { durable: true });
+  await channel.bindQueue(queue, exchange, routingKey);
 
   channel.consume(queue, (msg) => {
     if (msg !== null) {
